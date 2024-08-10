@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updatePassword,
     updateProfile,
   } from "firebase/auth";
   import { createContext, useEffect, useState } from "react";
@@ -33,6 +34,10 @@ import {
     const signinWithGmail = () => {
       return signInWithPopup(auth, googleProvider);
     };
+
+    const changePassword = (user, newPassword) => {
+      return updatePassword(user, newPassword)
+    }
   
     //Sign out
     const SignOUt = () => {
@@ -69,6 +74,7 @@ import {
       SignOUt,
       updateUser,
       loading,
+      changePassword
     };
     return (
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
