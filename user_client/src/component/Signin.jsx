@@ -7,11 +7,12 @@ import Swal from "sweetalert2";
 
 const Signin = () => {
   const { register, handleSubmit } = useForm();
-  const { signinWithGmail, logIn } = useContext(AuthContext);
+  const { changePassword, logIn } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const email = "hazem@company.com";
+
   const onSubmit = (data) => {
     logIn(email, data.password)
       .then((result) => {
@@ -30,6 +31,17 @@ const Signin = () => {
         setErrorMessage("Provide a correct email and password!");
       });
   };
+
+  // const change_Password = () => {
+  //   changePassword(email, "ahmed").then(() => {
+  //     alert("sucsses")
+  //     console.log("done")
+  //   }).catch((error) => {
+  //     const errorMassege = error.message;
+  //     setErrorMessage("Provide a correct email and password!");
+    
+  //   });
+  // }
   return (
     <div>
       <div className="hero  min-h-screen ">
@@ -55,11 +67,7 @@ const Signin = () => {
                   required
                   {...register("password")}
                 />
-                {/* <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label> */}
+                
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
