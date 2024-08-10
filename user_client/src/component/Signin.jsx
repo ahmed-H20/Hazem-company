@@ -1,8 +1,34 @@
+/* eslint-disable no-unused-vars */
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Signin = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { signinWithGmail, logIn } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    logIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Welcome Mr.Hazem!",
+            showConfirmButton: false,
+            timer: 2000
+          });
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        const errorMassege = error.message;
+        setErrorMessage("Provide a correct email and password!");
+      });
+  };
   return (
     <div>
       <div className="hero  min-h-screen ">
