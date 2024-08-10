@@ -11,8 +11,9 @@ const Signin = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const email = "hazem@company.com";
   const onSubmit = (data) => {
-    logIn(data.email, data.password)
+    logIn(email, data.password)
       .then((result) => {
         const user = result.user;
         Swal.fire({
@@ -20,7 +21,7 @@ const Signin = () => {
             icon: "success",
             title: "Welcome Mr.Hazem!",
             showConfirmButton: false,
-            timer: 2000
+            timer: 1500
           });
         navigate("/", { replace: true });
       })
@@ -42,19 +43,6 @@ const Signin = () => {
               className="card-body -mt-12"
               onSubmit={handleSubmit(onSubmit)}
             >
-              {/* Email */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  required
-                  {...register("email")}
-                />
-              </div>
               {/* Password */}
               <div className="form-control">
                 <label className="label">
