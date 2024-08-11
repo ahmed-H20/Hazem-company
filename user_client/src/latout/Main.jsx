@@ -1,7 +1,7 @@
 import { AuthContext } from '../context/AuthProvider'
 import Loading from '../component/Loading'
-import Dashboard from '../dashboard/Dashboard'
 import { useContext } from 'react'
+import DashboardLayout from './DashboardLayout'
 
 const Main = () => {
     const {loading} = useContext(AuthContext)
@@ -12,7 +12,7 @@ const Main = () => {
           <Loading/>
           :
           <div>
-            <Dashboard/>
+            <DashboardLayout/>
           </div>
         }
       </div>
