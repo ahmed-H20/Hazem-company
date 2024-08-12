@@ -19,6 +19,7 @@ import {
   // eslint-disable-next-line react/prop-types
   const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [clint, setClint] = useState([])
     const [loading, setLoading] = useState(true);
     // Create a new account
     const createUser = (email, password) => {
@@ -64,10 +65,19 @@ import {
       };
     }, []);
   
-  
+    useEffect(() => {
+      fetch("../../public/MOCK_DATA.json")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          setClint(data)
+          console.log(clint)
+        });
+    }, []);
   
     const authInfo = {
       user,
+      clint,
       createUser,
       logIn,
       signinWithGmail,

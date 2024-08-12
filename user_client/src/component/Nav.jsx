@@ -1,9 +1,9 @@
 const Nav = () => {
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 w-full ">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Hazem<span className="text-green">.co</span></a>
+        <a className="btn btn-ghost text-xl ">Hazem<span className="text-green">.co</span></a>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
@@ -30,15 +30,7 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
+              
               <li>
                 <a>Logout</a>
               </li>
