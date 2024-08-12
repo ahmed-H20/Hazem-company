@@ -10,7 +10,12 @@ const userSchema = new Schema({
     airPorts: String,
     flightTakeoff: String,
     doneWith: String,
-    
+    implementingCompany: String,
+    costumerName: String,
+    costumerPrice: Number,
+    companyPrice: Number,
+    profit: Number,
+    DebitAccount: Number
 })
 
 // create a model instance
