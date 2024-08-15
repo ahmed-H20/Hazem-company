@@ -12,19 +12,25 @@ const UsersTable = () => {
         <thead className="bg-green text-white">
           <tr>
             <th></th>
-            <th>الاسم</th>
-            <th>المبلغ الكلى</th>
-            <th>المدفوع</th>
-            <th>عدد الاشهر</th>
-            <th>المبلغ المتبقى</th>
-            <th>القسط/شهر</th>
-            <th>تاريخ الاضافة</th>
+            <th>اسم العميل</th>
+            <th>حساب مدين</th>
+            <th>سعر الشركة</th>
+            <th>سعر العميل</th>
+            <th>ربح</th>
+            <th>الشركة المنفذة</th>
+            <th>نفذت مع</th>
+            <th>طيران+اقلاع</th>
+            <th>من مطار/مطار</th>
+            <th>البلد+الرقم</th>
+            <th>منفذها لدينا</th>
+            <th>تاريخ الحجز</th>
+            <th>تاريخ السفر</th>
           </tr>
         </thead>
         <tbody>
           {
-            clint.map((item,index) => (
-                
+            
+            clint.map((item,index) => (                
             <tr key={index+1}>
                 <th>{index + 1}</th>
                 <td>{item.first_name}</td>

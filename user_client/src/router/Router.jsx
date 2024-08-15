@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import {
     createBrowserRouter,
   } from "react-router-dom";
 import Signin from "../component/Signin";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
-import Dashboard from "../dashboard/Dashboard";
+import AddClient from "../dashboard/admin/AddClient"
+import UsersTable from "../dashboard/UsersTable";
 import DashboardLayout from "../latout/DashboardLayout";
 
   const router = createBrowserRouter([
@@ -13,7 +15,12 @@ import DashboardLayout from "../latout/DashboardLayout";
       children: [
         {
           path: "/",
-          element: <Dashboard/>
+          element: <UsersTable/>
+        },
+        {
+          path:"/add_client",
+          element: <AddClient/>
+
         }
       ]      
     },

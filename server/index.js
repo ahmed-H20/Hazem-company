@@ -9,7 +9,16 @@ app.use(cors());
 app.use(express.json());
 
 //Mongodb connection
-mongoose.connect("mongodb+srv://ahmedheshamahah8:ue6CLKNLwPeIYkyI@hazem-ari-db.go7pz.mongodb.net/?retryWrites=true&w=majority&appName=hazem-ari-db")
+mongoose
+.connect("mongodb+srv://ahmedheshamahah8:ue6CLKNLwPeIYkyI@hazem-ari-db.go7pz.mongodb.net/clints-data?retryWrites=true&w=majority&appName=hazem-ari-db")
+.then(
+  console.log("mongoDB connect successfully!")
+)
+.catch((error)=>console.log("error in mongo DB",error))
+
+// Import router here
+const userRoutes = require('./api/routes/userRoutes');
+app.use('/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
