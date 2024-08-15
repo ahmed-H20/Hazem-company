@@ -13,6 +13,7 @@ const getAllUsers = async (req, res) => {
 // Add New User
 const createUser = async (req, res) => {
   const user = req.body;
+  console.log(user)
   const query = { costumerName: user.costumerName };
   try {
     const existingUser = await User.findOne(query);

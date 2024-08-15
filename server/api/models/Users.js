@@ -11,7 +11,7 @@ const userSchema = new Schema({
     flightTakeoff: String,
     doneWith: String,
     implementingCompany: String,
-    "اسم العميل": String,
+    costumerName: String,
     costumerPrice: Number,
     companyPrice: Number,
     profit: Number,

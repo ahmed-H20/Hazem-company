@@ -11,12 +11,8 @@ const AddClient = () => {
   const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
     
-    
-        const clientData = {
-          name: data.costumerName,
-          category: data.costumerPrice,
+      console.log(data)
           
-        }   
         const postMenuItem = await axiosPublic.post('/users', data);
         if(postMenuItem){
           Swal.fire({
@@ -101,7 +97,7 @@ const AddClient = () => {
             </label>
             <input
               type="text"
-              {...register("اسم العميل", { required: true })}
+              {...register("costumerName", { required: true })}
               placeholder="اسم العميل"
               className="input input-bordered w-full"
             />

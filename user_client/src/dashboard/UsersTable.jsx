@@ -10,7 +10,7 @@ const UsersTable = () => {
       <table className="table">
         {/* head */}
         <thead className="bg-green text-white">
-          <tr>
+          <tr className="text-center">
             <th></th>
             <th>اسم العميل</th>
             <th>حساب مدين</th>
@@ -29,17 +29,23 @@ const UsersTable = () => {
         </thead>
         <tbody>
           {
-            
+
             clint.map((item,index) => (                
             <tr key={index+1}>
                 <th>{index + 1}</th>
-                <td>{item.first_name}</td>
-                <td>10000 $</td>
-                <td>5700 $</td>
-                <td>10</td>
-                <td>4300 $</td>
-                <td>350 $/شهر</td>
-                <td>22/3/2024</td>
+                <td>{item.costumerName}</td>
+                <td>{item.DebitAccount}</td>
+                <td>{item.companyPrice}</td>
+                <td>{item.costumerPrice}</td>
+                <td>{item.profit}</td>
+                <td>{item.implementingCompany}</td>
+                <td>{item.doneWith}</td>
+                <td>{item.flightTakeoff}</td>
+                <td>{item.airPorts}</td>
+                <td>{item.countryPhone}</td>
+                <td>{item.outlet}</td>
+                <td>{item.bookingDate}</td>
+                <td>{item.travelDate}</td>
             </tr> 
             ))
           }         
