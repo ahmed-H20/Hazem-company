@@ -38,8 +38,8 @@ const EditClient = () => {
   };
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
-      <h2 className="text-2xl font-semibold my-4">
-        Manage All <span className="text-green">Menu Items</span>
+      <h2 className="text-2xl font-semibold my-8 text-right text-green">
+        حذف و تعديل <span className="text-black">بيانات العملاء</span>
       </h2>
       {/* menu item table */}
       <div>
@@ -59,10 +59,10 @@ const EditClient = () => {
                 <tr key={index}>
                   <th>{index + 1}</th>                  
                   <td>{item.costumerName}</td>
-                  <td>{item.bookingDate}</td>
-                  <td>{item.travelDate}</td>
+                  <td className="whitespace-nowrap">{item.bookingDate.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1")}</td>
+                  <td className="whitespace-nowrap">{item.travelDate.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1")}</td>
                   <td>
-                    <Link to={`/dashboard/update-clint/${item._id}`}>
+                    <Link to={`/update-clint/${item._id}`}>
                       <button 
                       className="btn btn-ghost btn-xs bg-orange-500 text-white">
                         <FaEdit />

@@ -8,6 +8,7 @@ import AddClient from "../dashboard/admin/AddClient"
 import UsersTable from "../dashboard/UsersTable";
 import DashboardLayout from "../latout/DashboardLayout";
 import EditClient from "../dashboard/admin/EditClient";
+import UpdateClient from "../dashboard/admin/UpdateClient";
 
   const router = createBrowserRouter([
     {
@@ -26,6 +27,11 @@ import EditClient from "../dashboard/admin/EditClient";
         {
           path: "/edit_client",
           element: <EditClient/>
+        },
+        {
+          path: "/update-clint/:id",
+          element: <UpdateClient/>,
+          loader: ({params}) => fetch(`http://localhost:3000/users/${params.id}`)
         }
       ]       
     },

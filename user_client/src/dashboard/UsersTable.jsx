@@ -1,11 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
+import useClient from "../hooks/UseClient";
 
 const UsersTable = () => {
-    const {clint}= useContext(AuthContext);
-
+  const { clint } = useContext(AuthContext);
+  const [, , refetch] = useClient();
+  const dateTimeString = clint[0].travelDate;
+  const dateOnly = dateTimeString.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1");
+  console.log(dateOnly);
+  refetch();
   return (
-    
     <div className="overflow-x-auto">
       <table className="table">
         {/* head */}
@@ -29,28 +34,69 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {
-
-            clint.map((item,index) => (                
-            <tr key={index+1}>
-                <th>{index + 1}</th>
-                <td>{item.costumerName}</td>
-                <td>$ {item.DebitAccount}</td>
-                <td>$ {item.companyPrice}</td>
-                <td>$ {item.costumerPrice}</td>
-                <td>$ {item.profit}</td>
-                <td>{item.implementingCompany}</td>
-                <td>{item.doneWith}</td>
-                <td>{item.flightTakeoff}</td>
-                <td>{item.airPorts}</td>
-                <td>{item.countryPhone}</td>
-                <td>{item.outlet}</td>
-                <td>{item.bookingDate}</td>
-                <td>{item.travelDate}</td>
-                <td>{item.comments}</td>
-            </tr> 
-            ))
-          }         
+          {clint.map((item, index) => (
+            <tr key={index + 1} className="hover:bg-gray-100 ">
+              <th>{index + 1}</th>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  {item.costumerName}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  $ {item.DebitAccount}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  $ {item.companyPrice}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  $ {item.costumerPrice}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>$ {item.profit}</Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  {item.implementingCompany}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>{item.doneWith}</Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  {item.flightTakeoff}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>{item.airPorts}</Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>
+                  {item.countryPhone}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>{item.outlet}</Link>
+              </td>
+              <td className="whitespace-nowrap">
+                <Link to={`/update-clint/${item._id}`}>{item.bookingDate.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1")}</Link>
+              </td>
+              <td className="whitespace-nowrap">
+                <Link to={`/update-clint/${item._id}`}>
+                  {item.travelDate.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1")}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/update-clint/${item._id}`}>{item.comments}</Link>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

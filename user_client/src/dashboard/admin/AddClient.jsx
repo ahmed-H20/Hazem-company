@@ -5,26 +5,46 @@ import useAxiosPublic from "../../hooks/UsePublicAxios";
 import { IoMdAirplane } from "react-icons/io";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AddClient = () => {
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
-    
-      console.log(data)
-          
-        const postMenuItem = await axiosPublic.post('/users', data);
-        if(postMenuItem){
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your Item is inserted successfully!",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
-      }
-  
+    const postMenuItem = await axiosPublic.post("/users", data);
+    if (postMenuItem) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your Item is inserted successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
+  // calculate profit logic
+  const [costumerPrice, setCostumerPrice] = useState(0);
+  const [companyPrice, setCompanyPrice] = useState(0);
+  const [result, setResult] = useState(0);
+
+  const handleCompanyPrice = (e) => {
+    setCompanyPrice(parseInt(e.target.value));
+  };
+
+  const handleCostumerPrice = (e) => {
+    setCostumerPrice(parseInt(e.target.value));
+  };
+
+  const handleCalculater = () => {
+    const save = costumerPrice - companyPrice;
+    setResult(save);
+  };
+
+  const handleResults = (e) => {
+    setResult(parseInt(e.target.value));
+  };
+
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-8 text-right">
@@ -54,13 +74,23 @@ const AddClient = () => {
               <label className="label">
                 <span className="label-text">الربح*</span>
               </label>
-              <input
-                type="price"
-                {...register("profit", { required: true })}
-                placeholder="ربح"
-                className="input input-bordered w-full"
-                defaultValue={0}
-              />
+              <div className="flex">
+                <input
+                  type="price"
+                  {...register("profit", { required: true })}
+                  placeholder="ربح"
+                  className="input input-bordered w-full"
+                  defaultValue={0}
+                  value={Number.isNaN(result) ? 0 : result}
+                  onChange={handleResults}
+                />
+                <button
+                  className="btn bg-green text-white"
+                  onClick={handleCalculater}
+                >
+                  Calc
+                </button>
+              </div>
             </div>
 
             {/* سعر الشركة */}
@@ -73,6 +103,8 @@ const AddClient = () => {
                 {...register("companyPrice", { required: true })}
                 placeholder="سعر الشركة "
                 className="input input-bordered w-full"
+                defaultValue={0}
+                onChange={handleCompanyPrice}
               />
             </div>
 
@@ -86,6 +118,8 @@ const AddClient = () => {
                 {...register("costumerPrice", { required: true })}
                 placeholder="سعر العميل "
                 className="input input-bordered w-full"
+                defaultValue={0}
+                onChange={handleCostumerPrice}
               />
             </div>
           </div>

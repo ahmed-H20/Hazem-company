@@ -27,6 +27,18 @@ const createUser = async (req, res) => {
   }
 };
 
+// Find User
+const findUser = async (req, res) => {
+  const usedId = req.params.id;
+  try{
+    const existingUser = await User.findById(usedId);
+    res.status(200).json(existingUser);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 // delete a user
 const deleteUser = async (req, res) => {
   const userId = req.params.id;
@@ -88,4 +100,5 @@ module.exports = {
   deleteUser,
   getAdmin,
   makeAdmin,
+  findUser,
 };
