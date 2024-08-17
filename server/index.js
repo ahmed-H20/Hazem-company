@@ -12,7 +12,7 @@ app.use(express.json());
 mongoose
 .connect("mongodb+srv://ahmedheshamahah8:ue6CLKNLwPeIYkyI@hazem-ari-db.go7pz.mongodb.net/clints-data?retryWrites=true&w=majority&appName=hazem-ari-db")
 .then(
-  console.log("mongoDB connect successfully!")
+  .log("mongoDB connect successfully!")
 )
 .catch((error)=>console.log("error in mongo DB",error))
 

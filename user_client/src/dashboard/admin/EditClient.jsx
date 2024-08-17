@@ -24,7 +24,6 @@ const EditClient = () => {
     }).then(async (result) => {        
       if (result.isConfirmed) {
         const res = await axiosPublic.delete(`/users/${item._id}`);
-        console.log(res);
        if(res) {
         refetch();
         Swal.fire({
