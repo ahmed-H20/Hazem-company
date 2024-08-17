@@ -35,9 +35,9 @@ const DashboardLayout = () => {
               {/* Sidebar content here */}
 
               <li className="mt-3">
-                <Link to="/">
+                <a href="/">
                   <MdDashboard /> العملاء
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/add_client">

@@ -1,4 +1,19 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+
 const Nav = () => {
+  const {SignOUt} = useContext(AuthContext)
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    SignOUt().then(() => {
+      
+    }).catch((error) => {
+      console.log(error)
+    });
+    alert ("logout success!")
+    navigate("/signup", {replace: true})
+  }
   return (
     <div>
       <div className="navbar bg-base-100 w-full ">
@@ -32,7 +47,7 @@ const Nav = () => {
             >
               
               <li>
-                <a>Logout</a>
+                <a onClick={handleLogOut}>Logout</a>
               </li>
             </ul>
           </div>
