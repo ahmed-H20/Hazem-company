@@ -38,7 +38,10 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              
+              {/* <li>
+                <button onClick={()=>document.getElementById('my_modal_5').showModal()}>change password</button>
+              </li>
+              <Modal/> */}
               <li>
                 <a onClick={handleLogOut}>Logout</a>
               </li>

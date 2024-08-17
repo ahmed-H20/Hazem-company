@@ -1,43 +1,30 @@
 /* eslint-disable no-undef */
 import {
-    createUserWithEmailAndPassword,
     getAuth,
-    GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    signInWithPopup,
     signOut,
     updatePassword,
-    updateProfile,
   } from "firebase/auth";
   import { createContext, useEffect, useState } from "react";
   import app from "../firebase/firebase.config";
   
   export const AuthContext = createContext();
   const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
   // eslint-disable-next-line react/prop-types
   const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [clint, setClint] = useState([])
     const [loading, setLoading] = useState(true);
-    // Create a new account
-    const createUser = (email, password) => {
-      return createUserWithEmailAndPassword(auth, email, password);
-    };
-  
+     
     // Sign in
     const logIn = (email, password) => {
       return signInWithEmailAndPassword(auth, email, password);
     };
-  
-    // Sign in with google
-    const signinWithGmail = () => {
-      return signInWithPopup(auth, googleProvider);
-    };
+ 
 
     const changePassword = (user, newPassword) => {
-      return updatePassword(user, newPassword)
+      return updatePassword(user, newPassword);
     }
   
     //Sign out
@@ -45,13 +32,6 @@ import {
       signOut(auth);
     };
   
-    //Update user
-    const updateUser = (name, photoURL) => {
-      updateProfile(auth.currentUser, {
-        displayName: name,
-        photoURL: photoURL,
-      });
-    };
   
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -69,20 +49,15 @@ import {
       fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
           setClint(data)
-          console.log(clint)
         });
     }, []);
   
     const authInfo = {
       user,
-      clint,
-      createUser,
-      logIn,
-      signinWithGmail,
+      clint,   
+      logIn, 
       SignOUt,
-      updateUser,
       loading,
       changePassword
     };
