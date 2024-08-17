@@ -1,5 +1,4 @@
 const User = require("../models/Users");
-
 // Get all users
 const getAllUsers = async (req, res) => {
   try {
@@ -13,7 +12,7 @@ const getAllUsers = async (req, res) => {
 // Add New User
 const createUser = async (req, res) => {
   const user = req.body;
-  console.log(user)
+  console.log(user);
   const query = { costumerName: user.costumerName };
   try {
     const existingUser = await User.findOne(query);
@@ -30,14 +29,13 @@ const createUser = async (req, res) => {
 // Find User
 const findUser = async (req, res) => {
   const usedId = req.params.id;
-  try{
+  try {
     const existingUser = await User.findById(usedId);
     res.status(200).json(existingUser);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 // delete a user
 const deleteUser = async (req, res) => {
@@ -54,51 +52,55 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// get admin
-const getAdmin = async (req, res) => {
-  const email = req.params.email;
-  const query = { email: email };
+// update single Client item
+const updateClient = async (req, res) => {
+  const clientId = req.params.id;
   try {
-    const user = await User.findOne(query);
-    // console.log(user)
-    if (email !== req.decoded.email) {
-      return res.status(403).send({ message: "Forbidden access" });
+    const updatedClient = await User.findByIdAndUpdate(clientId, req.body, {
+      new: true,
+      runValidator: true,
+    });
+
+    if (!updatedClient) {
+      return res.status(404).json({ message: "Clint not found" });
     }
-    let admin = false;
-    if (user) {
-      admin = user?.role === "admin";
-    }
-    res.status(200).json({ admin });
+
+    res.status(200).json(updatedClient);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// make admin of a user
-const makeAdmin = async (req, res) => {
-  const userId = req.params.id;
-  const { name, email, photoURL, role } = req.body;
+// convert data to  exel and download 
+const doanloadExelData = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { role: "admin" },
-      { new: true, runValidators: true }
-    );
+    const data = await User.find({}); // Fetch data from MongoDB
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).json(updatedUser);
+    // Create a worksheet from the data
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
+
+    // Convert workbook to buffer
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+
+    // Set response headers for file download
+    res.setHeader('Content-Disposition', 'attachment; filename="data.xlsx"');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    // Send the buffer as a response
+    res.send(excelBuffer);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).send('Error generating Excel file');
   }
 };
+
 
 module.exports = {
   getAllUsers,
   createUser,
   deleteUser,
-  getAdmin,
-  makeAdmin,
   findUser,
+  updateClient,
+  doanloadExelData,
 };

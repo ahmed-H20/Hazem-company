@@ -3,18 +3,38 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../context/AuthProvider";
 import { IoMdAirplane } from "react-icons/io";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/UsePublicAxios";
 
 const UpdateClient = () => {
-    const { register, handleSubmit } = useForm();
-    const client = useLoaderData();
-    const onSubmit = (data) => {
-        console.log(data)
-    }
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  const client = useLoaderData();
+  const onSubmit = async (data) => {
+    try{
+       const update = await axiosPublic.patch(`/users/${client._id}`, data);
+       if (update)
+       {        
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your item updated successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+       }
+    }    
+    catch (error) {
+        console.log(error)
+    };
+    
+  };
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-8 text-right">
-         تعديل بيانات<span className="text-green"> {client.costumerName}</span>
+        تعديل بيانات<span className="text-green"> {client.costumerName}</span>
       </h2>
 
       {/* form here */}
@@ -194,10 +214,14 @@ const UpdateClient = () => {
                 <span className="label-text">تاريخ الحجز *</span>
               </label>
               <input
-                type="date"
+                type="text"
                 {...register("bookingDate", { required: true })}
                 placeholder="تاريخ الحجز"
-                className="input input-bordered w-full"                
+                className="input input-bordered w-full"
+                defaultValue={client.bookingDate.replace(
+                  /(\d{4}-\d{2}-\d{2})T.*/,
+                  "$1"
+                )}
               />
             </div>
 
@@ -207,11 +231,14 @@ const UpdateClient = () => {
                 <span className="label-text">تاريخ السفر *</span>
               </label>
               <input
-                type="date"
+                type="text"
                 {...register("travelDate", { required: true })}
                 placeholder="تاريخ السفر"
                 className="input input-bordered w-full"
-                defaultValue={client.travelDate}
+                defaultValue={client.travelDate.replace(
+                    /(\d{4}-\d{2}-\d{2})T.*/,
+                    "$1"
+                  )}
               />
             </div>
           </div>
@@ -235,7 +262,7 @@ const UpdateClient = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UpdateClient
+export default UpdateClient;

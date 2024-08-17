@@ -1,14 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
-import useClient from "../hooks/UseClient";
 
 const UsersTable = () => {
   const { clint } = useContext(AuthContext);
-  const [, , refetch] = useClient();
-  refetch();
+  const [search, setSearch] = useState('');
+  const [searchDate, setSearchDate] = useState('');
+  
   return (
     <div className="overflow-x-auto">
+      <div className="lg:flex items-center gap-4  hidden ld:visible flex-row mb-6">
+            <div className="form-control w-full">              
+            <input
+              type="text"
+              placeholder="بحث بالاسم"
+              className="input input-bordered w-1/2 md:w-auto"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            </div>
+            <div className="form-control w-full">
+            <input
+              type="date"
+              placeholder="بحث بالتاريخ"
+              className="input input-bordered w-1/2 md:w-auto"
+              onChange={(e) => setSearchDate(e.target.value)}
+            />
+            </div>
+          </div>
+         
       <table className="table">
         {/* head */}
         <thead className="bg-green text-white">
@@ -31,7 +50,20 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {clint.map((item, index) => (
+          {clint.
+            filter((item) => {
+              if (!(search.toLowerCase() === '')){
+                return item.costumerName.includes(search);
+              }
+              else if(!(searchDate.toLowerCase() === '')){
+                return item.bookingDate.includes(searchDate);
+              }
+              else{
+                return item
+              }
+            })
+          
+          .map((item, index) => (
             <tr key={index + 1} className="hover:bg-gray-100 text-center">
               <th>{index + 1}</th>
               <td>

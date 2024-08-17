@@ -7,7 +7,7 @@ router.get('/', userController.getAllUsers);
 router.get('/:id', userController.findUser);
 router.post('/', userController.createUser);
 router.delete('/:id', userController.deleteUser);
-router.get('/admin/:email', userController.getAdmin);
-router.patch('/admin/:id', userController.makeAdmin);
+router.patch('/:id', userController.updateClient);
+router.patch('/', userController.doanloadExelData);
 
 module.exports = router;

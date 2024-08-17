@@ -11,16 +11,27 @@ const AddClient = () => {
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
-    const postMenuItem = await axiosPublic.post("/users", data);
-    if (postMenuItem) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your Item is inserted successfully!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+    try{
+      await axiosPublic.post("/users", data);      
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Item is inserted successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      
     }
+    catch (error){
+      Swal.fire({
+        title: "!هذا الاسم موجود بالفعل",
+        input:"!هل تريد تعديله",
+        icon: "wrong",
+        iconHtml: "x",
+        showConfirmButton: false,
+          timer: 1500,
+      })
+  }
   };
 
   // calculate profit logic

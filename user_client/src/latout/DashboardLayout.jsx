@@ -1,10 +1,31 @@
 import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
 import { FaEdit, FaPlusCircle } from "react-icons/fa";
-
 import { Link, Outlet } from "react-router-dom";
 import Nav from "../component/Nav";
+import useAxiosPublic from "../hooks/UsePublicAxios";
 
 const DashboardLayout = () => {
+  const axiosPublic = useAxiosPublic();
+  // Dounload data
+  const handleDownload = async () => {
+    try {
+      const response = await axiosPublic.get("/users", {
+        responseType: "blob", // Important to handle binary data
+      });
+
+      // Create a link element to trigger the download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "data.xlsx"); // or any other extension
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error("Error downloading the file:", error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -51,6 +72,11 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <hr />
+              <li>
+                <button className="btn" onClick={handleDownload}>
+                (Excel) تحميل ملف البيانات 
+                </button>
+              </li>
             </ul>
           </div>
         </div>
