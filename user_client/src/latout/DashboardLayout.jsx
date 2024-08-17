@@ -1,18 +1,14 @@
 import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
-import {
-  FaEdit,
-  FaPlusCircle,  
- 
-} from "react-icons/fa";
+import { FaEdit, FaPlusCircle } from "react-icons/fa";
 
 import { Link, Outlet } from "react-router-dom";
-import Nav from "../component/Nav"
+import Nav from "../component/Nav";
 
 const DashboardLayout = () => {
   return (
     <div>
       <div>
-      <Nav/>     
+        <Nav />
         <div className="drawer sm:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
@@ -22,11 +18,11 @@ const DashboardLayout = () => {
                 htmlFor="my-drawer-2"
                 className="btn btn-primary drawer-button lg:hidden "
               >
-                <MdDashboardCustomize/>
+                <MdDashboardCustomize />
               </label>
             </div>
             <div className="mt-5 md:mt-2 mx-4">
-              <Outlet/>
+              <Outlet />
             </div>
           </div>
           <div className="drawer-side">
@@ -37,12 +33,12 @@ const DashboardLayout = () => {
             ></label>
             <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               {/* Sidebar content here */}
-              
+
               <li className="mt-3">
                 <Link to="/">
                   <MdDashboard /> العملاء
                 </Link>
-              </li>              
+              </li>
               <li>
                 <Link to="/add_client">
                   <FaPlusCircle />
@@ -50,19 +46,17 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/add_client">
+                <Link to="/edit_client">
                   <FaEdit /> تعديل بيانات عميل
                 </Link>
               </li>
-              
-
-              <hr />              
+              <hr />
             </ul>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default DashboardLayout;

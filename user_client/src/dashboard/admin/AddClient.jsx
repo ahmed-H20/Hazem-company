@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
-import useAxiosPublic from "../../hooks/UsePuplicAxios";
+import useAxiosPublic from "../../hooks/UsePublicAxios";
 import { IoMdAirplane } from "react-icons/io";
 import Swal from "sweetalert2";
 import axios from "axios";

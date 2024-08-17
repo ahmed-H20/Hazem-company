@@ -7,6 +7,7 @@ import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import AddClient from "../dashboard/admin/AddClient"
 import UsersTable from "../dashboard/UsersTable";
 import DashboardLayout from "../latout/DashboardLayout";
+import EditClient from "../dashboard/admin/EditClient";
 
   const router = createBrowserRouter([
     {
@@ -21,8 +22,12 @@ import DashboardLayout from "../latout/DashboardLayout";
           path:"/add_client",
           element: <AddClient/>
 
+        },
+        {
+          path: "/edit_client",
+          element: <EditClient/>
         }
-      ]      
+      ]       
     },
     {
         path: "/sign_in",

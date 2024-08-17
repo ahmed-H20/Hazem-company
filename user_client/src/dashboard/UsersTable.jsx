@@ -25,6 +25,7 @@ const UsersTable = () => {
             <th>منفذها لدينا</th>
             <th>تاريخ الحجز</th>
             <th>تاريخ السفر</th>
+            <th>ملاحظات</th>
           </tr>
         </thead>
         <tbody>
@@ -34,10 +35,10 @@ const UsersTable = () => {
             <tr key={index+1}>
                 <th>{index + 1}</th>
                 <td>{item.costumerName}</td>
-                <td>{item.DebitAccount}</td>
-                <td>{item.companyPrice}</td>
-                <td>{item.costumerPrice}</td>
-                <td>{item.profit}</td>
+                <td>$ {item.DebitAccount}</td>
+                <td>$ {item.companyPrice}</td>
+                <td>$ {item.costumerPrice}</td>
+                <td>$ {item.profit}</td>
                 <td>{item.implementingCompany}</td>
                 <td>{item.doneWith}</td>
                 <td>{item.flightTakeoff}</td>
@@ -46,6 +47,7 @@ const UsersTable = () => {
                 <td>{item.outlet}</td>
                 <td>{item.bookingDate}</td>
                 <td>{item.travelDate}</td>
+                <td>{item.comments}</td>
             </tr> 
             ))
           }         
