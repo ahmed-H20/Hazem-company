@@ -6,9 +6,6 @@ import useClient from "../hooks/UseClient";
 const UsersTable = () => {
   const { clint } = useContext(AuthContext);
   const [, , refetch] = useClient();
-  const dateTimeString = clint[0].travelDate;
-  const dateOnly = dateTimeString.replace(/(\d{4}-\d{2}-\d{2})T.*/, "$1");
-  console.log(dateOnly);
   refetch();
   return (
     <div className="overflow-x-auto">
@@ -35,7 +32,7 @@ const UsersTable = () => {
         </thead>
         <tbody>
           {clint.map((item, index) => (
-            <tr key={index + 1} className="hover:bg-gray-100 ">
+            <tr key={index + 1} className="hover:bg-gray-100 text-center">
               <th>{index + 1}</th>
               <td>
                 <Link to={`/update-clint/${item._id}`}>
